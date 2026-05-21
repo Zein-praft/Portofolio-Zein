@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio — Muhammad Fahmi Zein</title>
+    <!-- Google Fonts & Tailwind/Lucide via CDN -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Konfigurasi Tailwind Custom -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            950: '#0a0a0a',
+                            900: '#111111',
+                            800: '#1a1a1a',
+                            700: '#252525',
+                            600: '#333333',
+                        },
+                        amber: {
+                            50:  '#fff8f0',
+                            100: '#ffe8cc',
+                            200: '#ffcc99',
+                            300: '#ffaa55',
+                            400: '#f97316',
+                            500: '#ea6a0a',
+                            600: '#c2540a',
+                            700: '#9a3f07',
+                            800: '#722e05',
+                            900: '#4a1e03',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-dark-950 text-gray-100 font-sans antialiased overflow-x-hidden">
+
+    <!-- Ambient Glow Background -->
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+
+    <!-- ===================== NAV ===================== -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-dark-950/85 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#" class="text-white font-semibold text-lg tracking-tight">Muhammad Fahmi Zein<span class="text-amber-400">.</span></a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#tentang"  class="text-sm text-gray-500 hover:text-white transition-colors">Tentang</a>
+                <a href="#keahlian" class="text-sm text-gray-500 hover:text-white transition-colors">Keahlian</a>
+                <a href="#project"  class="text-sm text-gray-500 hover:text-white transition-colors">Project</a>
+                <a href="#kontak"   class="text-sm text-gray-500 hover:text-white transition-colors">Kontak</a>
+            </div>
+            <button id="menuBtn" class="md:hidden text-gray-400 hover:text-white transition-colors">
+                <i data-lucide="menu" class="w-5 h-5"></i>
+            </button>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden border-t border-white/5 bg-dark-950/95 backdrop-blur-md">
+            <div class="px-6 py-4 flex flex-col gap-4">
+                <a href="#tentang"  class="text-sm text-gray-500 hover:text-white transition-colors">Tentang</a>
+                <a href="#keahlian" class="text-sm text-gray-500 hover:text-white transition-colors">Keahlian</a>
+                <a href="#project"  class="text-sm text-gray-500 hover:text-white transition-colors">Project</a>
+                <a href="#kontak"   class="text-sm text-gray-500 hover:text-white transition-colors">Kontak</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- ===================== HERO ===================== -->
+        <section class="min-h-screen flex items-center pt-20">
+            <div class="max-w-5xl mx-auto px-6 w-full">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="fade-up">
+                        <p class="text-amber-400 text-sm font-medium tracking-widest uppercase mb-4">Halo, saya</p>
+                        <h1 class="text-5xl md:text-7xl font-bold tracking-tight leading-[0.9] text-white mb-6">
+                            Muhammad Fahmi Zein
+                        </h1>
+                        <p class="text-gray-400 text-lg mb-6 max-w-md leading-relaxed">
+                            Frontend developer membangun web yang cepat, responsif, dan menyenangkan.
+                        </p>
+                        <div class="flex items-center gap-2.5 mb-8">
+                            <span class="status-dot"></span>
+                            <span class="text-sm text-gray-400">Available for freelance</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <a href="#project" class="inline-flex items-center gap-2 bg-amber-400 text-dark-950 px-6 py-3 rounded-full text-sm font-semibold hover:bg-amber-300 transition-colors">
+                                Lihat Project
+                                <i data-lucide="arrow-down-right" class="w-4 h-4"></i>
+                            </a>
+                            <a href="#kontak" class="inline-flex items-center gap-2 text-gray-400 hover:text-white px-6 py-3 rounded-full text-sm font-medium border border-white/10 hover:border-white/25 transition-all">
+                                Hubungi Saya
+                            </a>
+                        </div>
+                    </div>
+                    <div class="fade-up flex justify-center md:justify-end" style="transition-delay:0.15s">
+                        <div class="relative">
+                            <div class="w-64 h-80 md:w-72 md:h-96 rounded-2xl overflow-hidden border border-white/10">
+                                <img src="https://picsum.photos/seed/warmdev-portrait/400/500.jpg" alt="Foto" class="w-full h-full object-cover">
+                            </div>
+                            <div class="absolute -bottom-3 -right-3 w-64 h-80 md:w-72 md:h-96 rounded-2xl border border-amber-400/20 -z-10"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== TENTANG ===================== -->
+        <section id="tentang" class="py-24 md:py-32 border-t border-white/5">
+            <div class="max-w-5xl mx-auto px-6">
+                <div class="max-w-2xl fade-up">
+                    <p class="text-amber-400 text-sm font-medium tracking-widest uppercase mb-4">Tentang</p>
+                    <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-white mb-6">Sedikit tentang saya</h2>
+                    <p class="text-gray-400 leading-relaxed mb-4">
+                        Saya adalah seorang frontend developer dengan pengalaman dalam membangun website dan aplikasi web menggunakan teknologi modern. Kode yang baik bukan hanya yang berjalan, tapi yang mudah dibaca, dirawat, dan dikembangkan.
+                    </p>
+                    <p class="text-gray-400 leading-relaxed">
+                        Di luar coding, saya suka mengeksplorasi desain UI, mengikuti perkembangan teknologi terbaru, dan berbagi pengetahuan dengan komunitas dev lokal.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUOTE -->
+        <section class="py-16 md:py-20">
+            <div class="max-w-5xl mx-auto px-6">
+                <div class="fade-up max-w-3xl mx-auto text-center">
+                    <div class="flex justify-center mb-6">
+                        <div class="w-10 h-10 rounded-full bg-dark-800 border border-white/10 flex items-center justify-center">
+                            <i data-lucide="quote" class="w-4 h-4 text-amber-400"></i>
+                        </div>
+                    </div>
+                    <blockquote class="text-gray-200 text-xl md:text-2xl font-light leading-relaxed tracking-tight">
+                        Experience is the name everyone gives to their mistakes.
+                    </blockquote>
+                    <p class="text-gray-600 text-sm mt-4">— Oscar Wilde</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== KEAHLIAN ===================== -->
+        <section id="keahlian" class="py-24 md:py-32 border-t border-white/5">
+            <div class="max-w-5xl mx-auto px-6">
+                <div class="fade-up mb-12">
+                    <p class="text-amber-400 text-sm font-medium tracking-widest uppercase mb-4">Keahlian</p>
+                    <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-white">Tools and Framework</h2>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 fade-up" style="transition-delay:0.1s">
+                    <div class="skill-card bg-dark-800 border border-white/5 rounded-xl p-5 hover:bg-dark-700">
+                        <i data-lucide="layout" class="w-5 h-5 text-amber-400 mb-3"></i>
+                        <p class="text-white text-sm font-medium">HTML / CSS</p>
+                        <p class="text-gray-500 text-xs mt-1">Markup & styling / Frontend basic </p>
+                    </div>
+                    <div class="skill-card bg-dark-800 border border-white/5 rounded-xl p-5 hover:bg-dark-700">
+                        <i data-lucide="braces" class="w-5 h-5 text-amber-400 mb-3"></i>
+                        <p class="text-white text-sm font-medium">JavaScript</p>
+                        <p class="text-gray-500 text-xs mt-1">Programming Language</p>
+                    </div>
+                    <div class="skill-card bg-dark-800 border border-white/5 rounded-xl p-5 hover:bg-dark-700">
+                        <i data-lucide="atom" class="w-5 h-5 text-amber-400 mb-3"></i>
+                        <p class="text-white text-sm font-medium">React</p>
+                        <p class="text-gray-500 text-xs mt-1">Frontend library</p>
+                    </div>
+                    <div class="skill-card bg-dark-800 border border-white/5 rounded-xl p-5 hover:bg-dark-700">
+                        <i data-lucide="component" class="w-5 h-5 text-amber-400 mb-3"></i>
+                        <p class="text-white text-sm font-medium">Next.js</p>
+                        <p class="text-gray-500 text-xs mt-1">React framework</p>
+                    </div>
+                    <div class="skill-card bg-dark-800 border border-white/5 rounded-xl p-5 hover:bg-dark-700">
+                        <i data-lucide="wind" class="w-5 h-5 text-amber-400 mb-3"></i>
+                        <p class="text-white text-sm font-medium">Tailwind CSS</p>
+                        <p class="text-gray-500 text-xs mt-1">CSS framework</p>
+                    </div>
+                    <div class="skill-card bg-dark-800 border border-white/5 rounded-xl p-5 hover:bg-dark-700">
+                        <i data-lucide="server" class="w-5 h-5 text-amber-400 mb-3"></i>
+                        <p class="text-white text-sm font-medium">Node.js</p>
+                        <p class="text-gray-500 text-xs mt-1">Backend runtime</p>
+                    </div>
+                    <div class="skill-card bg-dark-800 border border-white/5 rounded-xl p-5 hover:bg-dark-700">
+                        <i data-lucide="database" class="w-5 h-5 text-amber-400 mb-3"></i>
+                        <p class="text-white text-sm font-medium">Laravel</p>
+                        <p class="text-gray-500 text-xs mt-1">Database</p>
+                    </div>
+                    <div class="skill-card bg-dark-800 border border-white/5 rounded-xl p-5 hover:bg-dark-700">
+                        <i data-lucide="git-branch" class="w-5 h-5 text-amber-400 mb-3"></i>
+                        <p class="text-white text-sm font-medium">Git</p>
+                        <p class="text-gray-500 text-xs mt-1">Version control</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== PROJECT ===================== -->
+        <section id="project" class="py-24 md:py-32 border-t border-white/5">
+            <div class="max-w-5xl mx-auto px-6">
+                <div class="fade-up mb-12">
+                    <p class="text-amber-400 text-sm font-medium tracking-widest uppercase mb-4">Project</p>
+                    <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-white">Selected Works</h2>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-5">
+                    <!-- Project 1 -->
+                    <div class="fade-up group">
+                        <div class="bg-dark-800 border border-white/5 rounded-2xl overflow-hidden hover:border-amber-400/30 transition-all duration-300 flex flex-col h-full">
+                            <div class="aspect-video overflow-hidden bg-dark-700 shrink-0">
+                                <img src="image project/Screenshot (1175).png" alt="Project 1" class="proj-img w-full h-full object-cover">
+                            </div>
+                            <div class="p-5 flex flex-col flex-1">
+                                <h3 class="text-white font-semibold mb-1.5">Financial Management System</h3>
+                                <p class="text-gray-500 text-sm leading-relaxed mb-4 flex-1">
+                                    Sistem manajemen keuangan berbasis web yang digunakan untuk mengelola pemasukan, pengeluaran, dan laporan keuangan secara lebih terstruktur dan efisien.
+                                </p>
+                                <div class="flex items-center gap-2 mb-4 flex-wrap">
+                                    <span class="text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">Laravel</span>
+                                    <span class="text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">Tailwind CSS</span>
+                                    <span class="text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">Alpine.js</span>
+                                    <span class="text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">MySQL</span>
+                                </div>
+                                <div class="flex items-center gap-4 pt-3 border-t border-white/5 mt-auto">
+                                    <a href="https://github.com/Zein-praft/financial-management-system" class="text-sm text-gray-300 hover:text-amber-400 transition-colors flex items-center gap-1.5">
+                                        <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Source
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="fade-up group" style="transition-delay:0.1s">
+                        <div class="bg-dark-800 border border-white/5 rounded-2xl overflow-hidden hover:border-amber-400/30 transition-all duration-300 flex flex-col h-full">
+                            <div class="aspect-video overflow-hidden bg-dark-700 shrink-0">
+                                <img src="image project/Screenshot (1389).png" alt="Project 2" class="proj-img w-full h-full object-cover">
+                            </div>
+                            <div class="p-5 flex flex-col flex-1">
+                                <h3 class="text-white font-semibold mb-1.5">Sistem Sarana Pengaduan Sekolah</h3>
+                                <p class="text-gray-500 text-sm leading-relaxed mb-4 flex-1">
+                                    Aplikasi ini adalah sebuah platform digital berbasis web yang berfungsi sebagai wadah penyaluran aspirasi, kritik, saran, maupun laporan pengaduan dari siswa kepada pihak manajemen sekolah.
+                                </p>
+                                <div class="flex items-center gap-2 mb-4 flex-wrap">
+                                    <span class="text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">Laravel</span>
+                                    <span class="text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">Tailwind CSS</span>
+                                    <span class="text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">ERD</span>
+                                    <span class="text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">MySQL</span>
+                                </div>
+                                <div class="flex items-center gap-4 pt-3 border-t border-white/5 mt-auto">
+                                    <a href="https://github.com/Zein-praft/sistem-pengaduan-sarana" class="text-sm text-gray-300 hover:text-amber-400 transition-colors flex items-center gap-1.5">
+                                        <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Source
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="fade-up group" style="transition-delay:0.2s">
+                        <div class="bg-dark-800 border border-white/5 rounded-2xl overflow-hidden hover:border-amber-400/30 transition-all duration-300 flex flex-col h-full">
+                            <div class="aspect-video overflow-hidden bg-dark-700 shrink-0">
+                                <img src="https://picsum.photos/seed/proj-app-3/600/340.jpg" alt="Project 3" class="proj-img w-full h-full object-cover">
+                            </div>
+                            <div class="p-5 flex flex-col flex-1">
+                                <h3 class="text-white font-semibold mb-1.5">Resto App</h3>
+                                <p class="text-gray-500 text-sm leading-relaxed mb-4 flex-1">
+                                    Aplikasi restoran berbasis web yang memungkinkan pengguna melihat daftar menu, menambahkan makanan ke keranjang (cart), melakukan pemesanan, serta menampilkan QR Code untuk pembayaran atau detail pesanan secara digital.
+                                </p>
+                                <div class="flex items-center gap-2 mb-4 flex-wrap">
+                                    <span class="text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">Laravel</span>
+                                    <span class="text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">Midtrans</span>
+                                    <span class="text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">Postman</span>
+                                    <span class="text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">MySQL</span>
+                                </div>
+                                <div class="flex items-center gap-4 pt-3 border-t border-white/5 mt-auto">
+                                    <a href="https://github.com/Zein-praft/resto-app" class="text-sm text-gray-300 hover:text-amber-400 transition-colors flex items-center gap-1.5">
+                                        <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Source
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== KONTAK ===================== -->
+        <section id="kontak" class="py-24 md:py-32 border-t border-white/5">
+            <div class="max-w-5xl mx-auto px-6">
+                <div class="fade-up">
+                    <p class="text-amber-400 text-sm font-medium tracking-widest uppercase mb-4">Kontak</p>
+                    <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-white mb-4">Hubungi saya</h2>
+                    <p class="text-gray-400 leading-relaxed mb-12 max-w-lg">
+                        Ingin membuat website, landing page, atau aplikasi web modern? Hubungi saya dan mari bangun project Anda bersama.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <!-- Gmail -->
+                        <a href="mailto:zeinfahmi449@gmail.com" class="group flex items-center gap-4 p-4 rounded-xl bg-white/[0.03] border border-white/5 hover:border-amber-400/30 hover:bg-white/[0.06] transition-all duration-300">
+                            <div class="w-11 h-11 rounded-lg bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-amber-400/10 transition-colors">
+                                <i data-lucide="mail" class="w-5 h-5 text-gray-400 group-hover:text-amber-400 transition-colors"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 mb-0.5">Gmail</p>
+                                <p class="text-sm text-gray-300 group-hover:text-white transition-colors truncate">zeinfahmi449@gmail.com</p>
+                            </div>
+                        </a>
+
+                        <!-- GitHub -->
+                        <a href="https://github.com/Zein-praft" target="_blank" class="group flex items-center gap-4 p-4 rounded-xl bg-white/[0.03] border border-white/5 hover:border-amber-400/30 hover:bg-white/[0.06] transition-all duration-300">
+                            <div class="w-11 h-11 rounded-lg bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-amber-400/10 transition-colors">
+                                <i data-lucide="github" class="w-5 h-5 text-gray-400 group-hover:text-amber-400 transition-colors"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 mb-0.5">GitHub</p>
+                                <p class="text-sm text-gray-300 group-hover:text-white transition-colors">Zein-praft</p>
+                            </div>
+                        </a>
+
+                        <!-- WhatsApp -->
+                        <a href="https://wa.me/08884512218" target="_blank" class="group flex items-center gap-4 p-4 rounded-xl bg-white/[0.03] border border-white/5 hover:border-amber-400/30 hover:bg-white/[0.06] transition-all duration-300">
+                            <div class="w-11 h-11 rounded-lg bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-amber-400/10 transition-colors">
+                                <i data-lucide="message-circle" class="w-5 h-5 text-gray-400 group-hover:text-amber-400 transition-colors"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 mb-0.5">WhatsApp</p>
+                                <p class="text-sm text-gray-300 group-hover:text-white transition-colors">+62 888 4512 218</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="py-10 border-t border-white/5">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex flex-col items-center md:items-start gap-1">
+                    <span class="text-white/80 text-sm font-medium tracking-wide">Muhammad Fahmi Zein</span>
+                    <p class="text-gray-600 text-xs">© 2026 All rights reserved.</p>
+                </div>
+                <a href="#" class="group flex items-center gap-2 text-gray-600 text-sm hover:text-amber-400 transition-colors">
+                    <span>Kembali ke atas</span>
+                    <span class="flex items-center justify-center w-7 h-7 rounded-full border border-white/10 group-hover:border-amber-400/40 transition-colors">
+                        <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

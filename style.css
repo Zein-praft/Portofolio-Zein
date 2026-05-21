@@ -1,0 +1,102 @@
+html { 
+    scroll-behavior: smooth; 
+}
+
+::selection {
+    background: rgba(249, 115, 22, 0.25);
+    color: #fff;
+}
+
+/* Fade up animation */
+.fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Status dot blinking effect */
+.status-dot {
+    width: 7px;
+    height: 7px;
+    background: #f97316;
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse-dot 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% { 
+        opacity: 1; 
+        box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.4); 
+    }
+    50% { 
+        opacity: 0.8; 
+        box-shadow: 0 0 0 6px rgba(249, 115, 22, 0); 
+    }
+}
+
+/* Subtle ambient glow backgrounds */
+.glow-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(140px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.glow-orb-1 {
+    width: 500px; 
+    height: 500px;
+    background: radial-gradient(circle, rgba(249, 115, 22, 0.08) 0%, transparent 70%);
+    top: -10%; 
+    left: -5%;
+    animation: orbFloat1 22s ease-in-out infinite;
+}
+
+.glow-orb-2 {
+    width: 400px; 
+    height: 400px;
+    background: radial-gradient(circle, rgba(194, 84, 10, 0.06) 0%, transparent 70%);
+    bottom: -10%; 
+    right: -5%;
+    animation: orbFloat2 28s ease-in-out infinite;
+}
+
+@keyframes orbFloat1 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(60px, 80px); }
+}
+
+@keyframes orbFloat2 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-60px, -60px); }
+}
+
+nav, main, footer { 
+    position: relative; 
+    z-index: 2; 
+}
+
+/* Project image zoom */
+.proj-img { 
+    transition: transform 0.5s ease; 
+}
+
+.group:hover .proj-img { 
+    transform: scale(1.05); 
+}
+
+/* Skill card hover line */
+.skill-card {
+    border-left: 2px solid transparent;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.skill-card:hover { 
+    border-left-color: #f97316; 
+}
