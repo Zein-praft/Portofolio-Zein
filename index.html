@@ -1,385 +1,951 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio — Muhammad Fahmi Zein</title>
-    <!-- Google Fonts & Tailwind/Lucide via CDN -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <!-- Konfigurasi Tailwind Custom -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        dark: {
-                            950: '#0a0a0a',
-                            900: '#111111',
-                            800: '#1a1a1a',
-                            700: '#252525',
-                            600: '#333333',
-                        },
-                        amber: {
-                            50:  '#fff8f0',
-                            100: '#ffe8cc',
-                            200: '#ffcc99',
-                            300: '#ffaa55',
-                            400: '#f97316',
-                            500: '#ea6a0a',
-                            600: '#c2540a',
-                            700: '#9a3f07',
-                            800: '#722e05',
-                            900: '#4a1e03',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="bg-dark-950 text-gray-100 font-sans antialiased overflow-x-hidden">
 
-    <!-- Ambient Glow Background -->
+    <style>
+        /* ============================================================
+           CSS VARIABLES — DARK & LIGHT THEME
+        ============================================================ */
+        :root, [data-theme="dark"] {
+            --bg-base:       #0a0a0a;
+            --bg-card:       #111111;
+            --bg-card-hover: #161616;
+            --bg-nav:        rgba(10,10,10,0.85);
+            --bg-skill:      #1a1a1a;
+            --bg-skill-hover:#252525;
+            --bg-contact:    rgba(255,255,255,0.03);
+            --bg-contact-hov:rgba(255,255,255,0.06);
+
+            --border-base:   rgba(255,255,255,0.05);
+            --border-card:   rgba(255,255,255,0.06);
+            --border-card-hov:rgba(249,115,22,0.25);
+            --border-contact:rgba(255,255,255,0.05);
+            --border-skill:  rgba(255,255,255,0.05);
+
+            --text-primary:  #ffffff;
+            --text-secondary:#9ca3af;
+            --text-muted:    #6b7280;
+            --text-faint:    rgba(255,255,255,0.35);
+
+            --timeline-card-bg:    #111111;
+            --timeline-card-hover: #141414;
+            --timeline-card-border:rgba(255,255,255,0.06);
+            --timeline-card-bh:    rgba(249,115,22,0.2);
+            --timeline-year-color: rgba(255,255,255,0.5);
+            --timeline-tag-color:  rgba(255,255,255,0.45);
+            --timeline-tag-border: rgba(255,255,255,0.1);
+            --timeline-dot-bg:     #0a0a0a;
+            --timeline-desc:       rgba(255,255,255,0.5);
+            --timeline-org:        rgba(255,255,255,0.35);
+
+            --orb1: rgba(249,115,22,0.08);
+            --orb2: rgba(194,84,10,0.06);
+
+            --proj-img-bg:   #252525;
+            --quote-icon-bg: #1a1a1a;
+
+            --toggle-icon: "sun";
+            --footer-text: rgba(255,255,255,0.8);
+            --footer-copy: #4b5563;
+            --back-top:    #4b5563;
+        }
+
+        [data-theme="light"] {
+            --bg-base:       #f5f0eb;
+            --bg-card:       #ede8e2;
+            --bg-card-hover: #e8e2db;
+            --bg-nav:        rgba(245,240,235,0.88);
+            --bg-skill:      #ede8e2;
+            --bg-skill-hover:#e5dfd8;
+            --bg-contact:    rgba(0,0,0,0.03);
+            --bg-contact-hov:rgba(0,0,0,0.055);
+
+            --border-base:   rgba(0,0,0,0.07);
+            --border-card:   rgba(0,0,0,0.07);
+            --border-card-hov:rgba(249,115,22,0.4);
+            --border-contact:rgba(0,0,0,0.07);
+            --border-skill:  rgba(0,0,0,0.07);
+
+            --text-primary:  #1a1612;
+            --text-secondary:#5c5249;
+            --text-muted:    #8a7f75;
+            --text-faint:    rgba(0,0,0,0.4);
+
+            --timeline-card-bg:    #ede8e2;
+            --timeline-card-hover: #e8e2db;
+            --timeline-card-border:rgba(0,0,0,0.07);
+            --timeline-card-bh:    rgba(249,115,22,0.3);
+            --timeline-year-color: rgba(0,0,0,0.45);
+            --timeline-tag-color:  rgba(0,0,0,0.5);
+            --timeline-tag-border: rgba(0,0,0,0.12);
+            --timeline-dot-bg:     #f5f0eb;
+            --timeline-desc:       rgba(0,0,0,0.5);
+            --timeline-org:        rgba(0,0,0,0.38);
+
+            --orb1: rgba(249,115,22,0.12);
+            --orb2: rgba(194,84,10,0.08);
+
+            --proj-img-bg:   #ddd8d2;
+            --quote-icon-bg: #ede8e2;
+
+            --footer-text: rgba(0,0,0,0.75);
+            --footer-copy: #8a7f75;
+            --back-top:    #8a7f75;
+        }
+
+        /* ============================================================
+           BASE
+        ============================================================ */
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            overflow-x: hidden;
+        }
+
+        ::selection { background: rgba(249,115,22,0.25); color: var(--text-primary); }
+
+        /* ============================================================
+           THEME TOGGLE BUTTON
+        ============================================================ */
+        .theme-toggle {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid var(--border-base);
+            background: var(--bg-skill);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            flex-shrink: 0;
+        }
+        .theme-toggle:hover {
+            border-color: rgba(249,115,22,0.4);
+            color: #f97316;
+            background: var(--bg-skill-hover);
+        }
+        .theme-toggle svg { width: 16px; height: 16px; transition: transform 0.4s ease; }
+        .theme-toggle:active svg { transform: rotate(20deg) scale(0.9); }
+
+        /* ============================================================
+           GLOW ORBS
+        ============================================================ */
+        .glow-orb {
+            position: fixed; border-radius: 50%;
+            filter: blur(140px); pointer-events: none; z-index: 0;
+            transition: background 0.4s ease;
+        }
+        .glow-orb-1 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, var(--orb1) 0%, transparent 70%);
+            top: -10%; left: -5%;
+            animation: orbFloat1 22s ease-in-out infinite;
+        }
+        .glow-orb-2 {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, var(--orb2) 0%, transparent 70%);
+            bottom: -10%; right: -5%;
+            animation: orbFloat2 28s ease-in-out infinite;
+        }
+        @keyframes orbFloat1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(60px,80px)} }
+        @keyframes orbFloat2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-60px,-60px)} }
+
+        /* ============================================================
+           NAV
+        ============================================================ */
+        nav, main, footer { position: relative; z-index: 2; }
+
+        nav {
+            background: var(--bg-nav);
+            border-bottom: 1px solid var(--border-base);
+            backdrop-filter: blur(12px);
+            transition: background 0.4s ease, border-color 0.4s ease;
+        }
+
+        .nav-link {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            transition: color 0.2s;
+            text-decoration: none;
+        }
+        .nav-link:hover { color: var(--text-primary); }
+
+        .nav-brand { color: var(--text-primary); font-weight: 600; font-size: 1.125rem; letter-spacing: -0.02em; text-decoration: none; }
+
+        .mobile-menu {
+            border-top: 1px solid var(--border-base);
+            background: var(--bg-nav);
+            backdrop-filter: blur(12px);
+        }
+
+        /* ============================================================
+           FADE-UP ANIMATION
+        ============================================================ */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.55s ease, transform 0.55s ease;
+        }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* staggered children inside a visible fade-up parent */
+        .stagger-children > * {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.45s ease, transform 0.45s ease;
+        }
+        .stagger-children.visible > *:nth-child(1) { transition-delay: 0.05s; opacity:1; transform:none; }
+        .stagger-children.visible > *:nth-child(2) { transition-delay: 0.12s; opacity:1; transform:none; }
+        .stagger-children.visible > *:nth-child(3) { transition-delay: 0.19s; opacity:1; transform:none; }
+        .stagger-children.visible > *:nth-child(4) { transition-delay: 0.26s; opacity:1; transform:none; }
+        .stagger-children.visible > *:nth-child(5) { transition-delay: 0.33s; opacity:1; transform:none; }
+        .stagger-children.visible > *:nth-child(n+6) { transition-delay: 0.38s; opacity:1; transform:none; }
+
+        /* ============================================================
+           STATUS DOT
+        ============================================================ */
+        .status-dot {
+            width: 7px; height: 7px;
+            background: #f97316;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse-dot 2.5s ease-in-out infinite;
+        }
+        @keyframes pulse-dot {
+            0%,100% { opacity:1; box-shadow:0 0 0 0 rgba(249,115,22,0.4); }
+            50%      { opacity:0.8; box-shadow:0 0 0 6px rgba(249,115,22,0); }
+        }
+
+        /* ============================================================
+           SECTION DIVIDERS
+        ============================================================ */
+        .section-divider { border-top: 1px solid var(--border-base); }
+
+        /* ============================================================
+           SKILL CARDS
+        ============================================================ */
+        .skill-card {
+            background: var(--bg-skill);
+            border: 1px solid var(--border-skill);
+            border-left: 2px solid transparent;
+            border-radius: 0.5rem;
+            padding: 12px 16px;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .skill-card:hover {
+            background: var(--bg-skill-hover);
+            border-left-color: #f97316;
+        }
+        .skill-card p { color: var(--text-primary); font-size: 0.875rem; }
+
+        /* ============================================================
+           PROJECT CARDS  — 3D TILT + GLOW BORDER + STAGGER SLIDE-IN
+        ============================================================ */
+        .proj-card-wrap {
+            perspective: 900px;
+        }
+
+        .proj-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 1rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            transition:
+                border-color 0.35s ease,
+                background 0.35s ease,
+                transform 0.25s ease,
+                box-shadow 0.35s ease;
+            transform-style: preserve-3d;
+            will-change: transform;
+            position: relative;
+        }
+
+        /* Glow border sweep on hover */
+        .proj-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: conic-gradient(
+                from var(--angle, 0deg),
+                transparent 0%,
+                rgba(249,115,22,0.7) 20%,
+                transparent 40%
+            );
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .proj-card:hover::before { opacity: 1; animation: borderSpin 2.5s linear infinite; }
+
+        @property --angle {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
+        @keyframes borderSpin { to { --angle: 360deg; } }
+
+        .proj-card:hover {
+            border-color: var(--border-card-hov);
+            background: var(--bg-card-hover);
+            box-shadow: 0 0 32px rgba(249,115,22,0.08), 0 8px 32px rgba(0,0,0,0.25);
+        }
+
+        .proj-img-wrap { overflow: hidden; background: var(--proj-img-bg); flex-shrink: 0; }
+        .proj-img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+        .proj-card:hover .proj-img { transform: scale(1.07); }
+
+        .proj-body { padding: 20px; display: flex; flex-direction: column; flex: 1; }
+        .proj-title { color: var(--text-primary); font-weight: 600; margin-bottom: 6px; }
+        .proj-desc  { color: var(--text-secondary); font-size: 0.875rem; line-height: 1.65; margin-bottom: 16px; flex: 1; }
+
+        .proj-tag {
+            font-size: 0.7rem;
+            color: #f97316;
+            background: rgba(249,115,22,0.1);
+            padding: 3px 10px;
+            border-radius: 9999px;
+        }
+
+        .proj-footer {
+            border-top: 1px solid var(--border-base);
+            padding-top: 12px;
+            margin-top: auto;
+        }
+        .proj-source-link {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s;
+        }
+        .proj-source-link:hover { color: #f97316; }
+
+        /* ============================================================
+           CONTACT CARDS
+        ============================================================ */
+        .contact-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            border-radius: 12px;
+            background: var(--bg-contact);
+            border: 1px solid var(--border-contact);
+            text-decoration: none;
+            transition: border-color 0.3s, background 0.3s;
+        }
+        .contact-card:hover {
+            border-color: rgba(249,115,22,0.3);
+            background: var(--bg-contact-hov);
+        }
+        .contact-icon {
+            width: 44px; height: 44px;
+            border-radius: 8px;
+            background: rgba(128,128,128,0.08);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            transition: background 0.25s;
+        }
+        .contact-card:hover .contact-icon { background: rgba(249,115,22,0.1); }
+        .contact-icon svg { color: var(--text-muted); transition: color 0.25s; }
+        .contact-card:hover .contact-icon svg { color: #f97316; }
+        .contact-label { font-size: 0.7rem; color: var(--text-muted); margin-bottom: 2px; }
+        .contact-value { font-size: 0.875rem; color: var(--text-secondary); transition: color 0.25s; }
+        .contact-card:hover .contact-value { color: var(--text-primary); }
+
+        /* ============================================================
+           QUOTE
+        ============================================================ */
+        .quote-icon-wrap {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: var(--quote-icon-bg);
+            border: 1px solid var(--border-base);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 24px;
+        }
+        blockquote { color: var(--text-primary); }
+
+        /* ============================================================
+           TIMELINE
+        ============================================================ */
+        .timeline-container { position: relative; }
+
+        .timeline-line {
+            position: absolute;
+            left: 200px; top: 0; bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, rgba(249,115,22,0.3) 5%, rgba(249,115,22,0.3) 95%, transparent);
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 0 48px;
+            margin-bottom: 32px;
+            position: relative;
+        }
+
+        .timeline-meta {
+            text-align: right;
+            padding-right: 28px;
+            padding-top: 28px;
+        }
+
+        .timeline-year {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--timeline-year-color);
+            letter-spacing: -0.02em;
+            display: block;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            transition: color 0.4s;
+        }
+
+        .timeline-badge {
+            display: inline-block;
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 3px;
+            border: 1px solid;
+        }
+
+        .badge-professional { color:#f97316; border-color:rgba(249,115,22,0.35); background:rgba(249,115,22,0.08); }
+        .badge-freelance    { color:#60a5fa; border-color:rgba(96,165,250,0.35);  background:rgba(96,165,250,0.08);  }
+        .badge-education    { color:#34d399; border-color:rgba(52,211,153,0.35);  background:rgba(52,211,153,0.08);  }
+
+        .timeline-dot {
+            position: absolute;
+            left: 192px; top: 34px;
+            width: 17px; height: 17px;
+            border-radius: 50%;
+            border: 1px solid rgba(249,115,22,0.5);
+            background: var(--timeline-dot-bg);
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.4s;
+        }
+        .timeline-dot::after {
+            content:'';
+            width:6px; height:6px;
+            border-radius:50%;
+            background:#f97316;
+        }
+
+        .timeline-card {
+            background: var(--timeline-card-bg);
+            border: 1px solid var(--timeline-card-border);
+            border-radius: 14px;
+            padding: 28px 28px 24px;
+            transition: border-color 0.35s, background 0.35s, box-shadow 0.35s, transform 0.25s;
+        }
+        .timeline-card:hover {
+            border-color: var(--timeline-card-bh);
+            background: var(--timeline-card-hover);
+            box-shadow: 0 0 24px rgba(249,115,22,0.06), 0 4px 20px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+
+        .timeline-card-title { font-size:18px; font-weight:700; color:var(--text-primary); letter-spacing:-0.02em; margin-bottom:4px; }
+        .timeline-card-org   { font-size:13px; color:var(--timeline-org); margin-bottom:14px; transition:color 0.4s; }
+        .timeline-card-desc  { font-size:13.5px; color:var(--timeline-desc); line-height:1.7; margin-bottom:18px; transition:color 0.4s; }
+
+        .timeline-tags { display:flex; flex-wrap:wrap; gap:8px; }
+        .timeline-tag {
+            font-size:11px;
+            color: var(--timeline-tag-color);
+            border: 1px solid var(--timeline-tag-border);
+            padding:4px 10px;
+            border-radius:4px;
+            letter-spacing:0.02em;
+            transition: color 0.4s, border-color 0.4s;
+        }
+
+        /* ============================================================
+           EXPERTISE — VISUAL GROUPED LAYOUT
+        ============================================================ */
+        .exp-group { margin-bottom: 40px; }
+
+        .exp-group-header {
+            display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+        }
+        .exp-group-icon {
+            width: 32px; height: 32px; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .exp-group-label { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+        .exp-group-line  { flex: 1; height: 1px; background: var(--border-base); }
+
+        .grp-frontend .exp-group-icon { background: rgba(249,115,22,0.12); }
+        .grp-frontend .exp-group-icon svg { color: #f97316; }
+        .grp-frontend .exp-group-label  { color: #f97316; }
+
+        .grp-backend  .exp-group-icon { background: rgba(96,165,250,0.12); }
+        .grp-backend  .exp-group-icon svg { color: #60a5fa; }
+        .grp-backend  .exp-group-label  { color: #60a5fa; }
+
+        .grp-database .exp-group-icon { background: rgba(52,211,153,0.12); }
+        .grp-database .exp-group-icon svg { color: #34d399; }
+        .grp-database .exp-group-label  { color: #34d399; }
+
+        .grp-tools    .exp-group-icon { background: rgba(167,139,250,0.12); }
+        .grp-tools    .exp-group-icon svg { color: #a78bfa; }
+        .grp-tools    .exp-group-label  { color: #a78bfa; }
+
+        .skill-pill {
+            display: flex; align-items: center; gap: 10px;
+            padding: 12px 14px;
+            background: var(--bg-skill);
+            border: 1px solid var(--border-skill);
+            border-radius: 10px;
+            cursor: default;
+            transition: background 0.22s, border-color 0.22s, transform 0.22s, box-shadow 0.22s;
+            position: relative; overflow: hidden;
+        }
+        .skill-pill::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(105deg, transparent 40%, rgba(249,115,22,0.06) 50%, transparent 60%);
+            transform: translateX(-100%); transition: transform 0.5s ease;
+        }
+        .skill-pill:hover::after { transform: translateX(100%); }
+        .skill-pill:hover { transform: translateY(-2px); box-shadow: 0 4px 18px rgba(0,0,0,0.2); }
+
+        .grp-frontend .skill-pill:hover { border-color: rgba(249,115,22,0.35); background: var(--bg-skill-hover); }
+        .grp-backend  .skill-pill:hover { border-color: rgba(96,165,250,0.35);  background: var(--bg-skill-hover); }
+        .grp-database .skill-pill:hover { border-color: rgba(52,211,153,0.35);  background: var(--bg-skill-hover); }
+        .grp-tools    .skill-pill:hover { border-color: rgba(167,139,250,0.35); background: var(--bg-skill-hover); }
+
+        .skill-pill-icon {
+            width: 34px; height: 34px; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .grp-frontend .skill-pill-icon { background: rgba(249,115,22,0.1); }
+        .grp-frontend .skill-pill-icon svg { color: #f97316; }
+        .grp-backend  .skill-pill-icon { background: rgba(96,165,250,0.1); }
+        .grp-backend  .skill-pill-icon svg { color: #60a5fa; }
+        .grp-database .skill-pill-icon { background: rgba(52,211,153,0.1); }
+        .grp-database .skill-pill-icon svg { color: #34d399; }
+        .grp-tools    .skill-pill-icon { background: rgba(167,139,250,0.1); }
+        .grp-tools    .skill-pill-icon svg { color: #a78bfa; }
+
+        .skill-pill-name  { font-size: 13.5px; font-weight: 500; color: var(--text-primary); flex: 1; }
+        .skill-pill-level {
+            font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
+            text-transform: uppercase; padding: 2px 7px; border-radius: 4px; opacity: 0.85;
+        }
+        .level-advanced     { color: #f97316; background: rgba(249,115,22,0.1); }
+        .level-intermediate { color: #60a5fa; background: rgba(96,165,250,0.1); }
+        .level-familiar     { color: #a78bfa; background: rgba(167,139,250,0.1); }
+
+        .skill-pills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            gap: 10px;
+        }
+
+        /* ============================================================
+           FOOTER
+        ============================================================ */
+        .footer-name  { color: var(--footer-text); }
+        .footer-copy  { color: var(--footer-copy); }
+        .back-top-btn { color: var(--back-top); text-decoration: none; display:inline-flex; align-items:center; gap:8px; font-size:0.875rem; transition: color 0.2s; }
+        .back-top-btn:hover { color:#f97316; }
+        .back-top-circle {
+            display:flex; align-items:center; justify-content:center;
+            width:28px; height:28px;
+            border-radius:50%;
+            border: 1px solid var(--border-base);
+            transition: border-color 0.2s;
+        }
+        .back-top-btn:hover .back-top-circle { border-color: rgba(249,115,22,0.4); }
+
+        /* ============================================================
+           RESPONSIVE TIMELINE
+        ============================================================ */
+        @media (max-width: 768px) {
+            .timeline-line  { left: 16px; }
+            .timeline-item  { grid-template-columns: 1fr; padding-left: 40px; }
+            .timeline-meta  { display:flex; align-items:center; gap:12px; text-align:left; padding-right:0; margin-bottom:8px; }
+            .timeline-year  { font-size:14px; margin-bottom:0; }
+            .timeline-dot   { left:8px; top:14px; }
+        }
+
+        /* ============================================================
+           HERO IMAGE BORDER
+        ============================================================ */
+        .hero-img-border { border: 1px solid var(--border-card); border-radius: 1rem; overflow: hidden; }
+        .hero-img-accent { border: 1px solid rgba(249,115,22,0.2); border-radius: 1rem; }
+    </style>
+</head>
+<body>
+
     <div class="glow-orb glow-orb-1"></div>
     <div class="glow-orb glow-orb-2"></div>
 
-    <!-- ===================== NAV ===================== -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-dark-950/85 backdrop-blur-md border-b border-white/5">
+    <!-- ===== NAV ===== -->
+    <nav class="fixed top-0 left-0 right-0 z-50">
         <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="#" class="text-white font-semibold text-lg tracking-tight">Muhammad Fahmi Zein<span class="text-amber-400">.</span></a>
+            <a href="#" class="nav-brand">Muhammad Fahmi Zein<span style="color:#f97316">.</span></a>
+
             <div class="hidden md:flex items-center gap-8">
-                <a href="#tentang"  class="text-sm text-gray-500 hover:text-white transition-colors">About me</a>
-                <a href="#keahlian" class="text-sm text-gray-500 hover:text-white transition-colors">Expertise</a>
-                <a href="#project"  class="text-sm text-gray-500 hover:text-white transition-colors">Project</a>
-                <a href="#kontak"   class="text-sm text-gray-500 hover:text-white transition-colors">Contact</a>
+                <a href="#tentang"  class="nav-link">About me</a>
+                <a href="#keahlian" class="nav-link">Expertise</a>
+                <a href="#journey"  class="nav-link">Journey</a>
+                <a href="#project"  class="nav-link">Project</a>
+                <a href="#kontak"   class="nav-link">Contact</a>
             </div>
-            <button id="menuBtn" class="md:hidden text-gray-400 hover:text-white transition-colors">
-                <i data-lucide="menu" class="w-5 h-5"></i>
-            </button>
+
+            <div class="flex items-center gap-3">
+                <!-- Theme toggle -->
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i data-lucide="moon" id="themeIcon"></i>
+                </button>
+                <!-- Mobile hamburger -->
+                <button id="menuBtn" class="md:hidden theme-toggle">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
         </div>
-        <div id="mobileMenu" class="hidden md:hidden border-t border-white/5 bg-dark-950/95 backdrop-blur-md">
+
+        <div id="mobileMenu" class="hidden md:hidden mobile-menu">
             <div class="px-6 py-4 flex flex-col gap-4">
-                <a href="#tentang"  class="text-sm text-gray-500 hover:text-white transition-colors">About me</a>
-                <a href="#keahlian" class="text-sm text-gray-500 hover:text-white transition-colors">expertise</a>
-                <a href="#project"  class="text-sm text-gray-500 hover:text-white transition-colors">Project</a>
-                <a href="#kontak"   class="text-sm text-gray-500 hover:text-white transition-colors">Contact</a>
+                <a href="#tentang"  class="nav-link">About me</a>
+                <a href="#keahlian" class="nav-link">Expertise</a>
+                <a href="#journey"  class="nav-link">Journey</a>
+                <a href="#project"  class="nav-link">Project</a>
+                <a href="#kontak"   class="nav-link">Contact</a>
             </div>
         </div>
     </nav>
 
     <main>
-        <!-- ===================== HERO ===================== -->
+        <!-- ===== HERO ===== -->
         <section class="min-h-screen flex items-center pt-20">
             <div class="max-w-5xl mx-auto px-6 w-full">
                 <div class="grid md:grid-cols-2 gap-12 items-center">
                     <div class="fade-up">
-                        <p class="text-amber-400 text-sm font-medium tracking-widest uppercase mb-4">Hello, im</p>
-                        <h1 class="text-5xl md:text-7xl font-bold tracking-tight leading-[0.9] text-white mb-6">
-                            Muhammad Fahmi Zein
+                        <p style="color:#f97316;font-size:0.8rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:16px">Hello, im</p>
+                        <h1 style="font-size:clamp(2.6rem,8vw,4.5rem);font-weight:700;letter-spacing:-0.04em;line-height:0.92;color:var(--text-primary);margin-bottom:24px">
+                            Muhammad<br>Fahmi Zein
                         </h1>
-                        <p class="text-gray-400 text-lg mb-6 max-w-md leading-relaxed">
+                        <p style="color:var(--text-secondary);font-size:1.1rem;max-width:420px;line-height:1.6;margin-bottom:24px">
                             Frontend developer builds web that is fast, responsive, and enjoyable.
                         </p>
-                        <div class="flex items-center gap-2.5 mb-8">
+                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:32px">
                             <span class="status-dot"></span>
-                            <span class="text-sm text-gray-400">Available for freelance</span>
+                            <span style="font-size:0.875rem;color:var(--text-secondary)">Available for freelance</span>
                         </div>
-                        <div class="flex items-center gap-4">
-                            <a href="#project" class="inline-flex items-center gap-2 bg-amber-400 text-dark-950 px-6 py-3 rounded-full text-sm font-semibold hover:bg-amber-300 transition-colors">
+                        <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+                            <a href="#project" style="display:inline-flex;align-items:center;gap:8px;background:#f97316;color:#0a0a0a;padding:12px 24px;border-radius:9999px;font-size:0.875rem;font-weight:600;text-decoration:none;transition:background 0.2s" onmouseover="this.style.background='#fb923c'" onmouseout="this.style.background='#f97316'">
                                 See Project
-                                <i data-lucide="arrow-down-right" class="w-4 h-4"></i>
+                                <i data-lucide="arrow-down-right" style="width:16px;height:16px"></i>
                             </a>
-                            <a href="#kontak" class="inline-flex items-center gap-2 text-gray-400 hover:text-white px-6 py-3 rounded-full text-sm font-medium border border-white/10 hover:border-white/25 transition-all">
+                            <a href="#kontak" style="display:inline-flex;align-items:center;gap:8px;color:var(--text-secondary);padding:12px 24px;border-radius:9999px;font-size:0.875rem;font-weight:500;text-decoration:none;border:1px solid var(--border-card);transition:all 0.2s" onmouseover="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--text-primary');this.style.borderColor='rgba(249,115,22,0.3)'" onmouseout="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--text-secondary');this.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--border-card')">
                                 Contact me
                             </a>
                         </div>
                     </div>
-                    <div class="fade-up flex justify-center md:justify-end" style="transition-delay:0.15s">
-                        <div class="relative">
-                            <div class="w-64 h-80 md:w-72 md:h-96 rounded-2xl overflow-hidden border border-white/10">
-                                <img src="https://picsum.photos/seed/warmdev-portrait/400/500.jpg" alt="Foto" class="w-full h-full object-cover">
+
+                    <div class="fade-up" style="display:flex;justify-content:flex-end;transition-delay:0.15s">
+                        <div style="position:relative">
+                            <div class="hero-img-border" style="width:256px;height:320px">
+                                <img src="https://picsum.photos/seed/warmdev-portrait/400/500.jpg" alt="Foto" style="width:100%;height:100%;object-fit:cover">
                             </div>
-                            <div class="absolute -bottom-3 -right-3 w-64 h-80 md:w-72 md:h-96 rounded-2xl border border-amber-400/20 -z-10"></div>
+                            <div class="hero-img-accent" style="position:absolute;bottom:-12px;right:-12px;width:256px;height:320px;z-index:-1"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ===================== TENTANG ===================== -->
-        <section id="tentang" class="py-24 md:py-32 border-t border-white/5">
+        <!-- ===== TENTANG ===== -->
+        <section id="tentang" class="py-24 md:py-32 section-divider">
             <div class="max-w-5xl mx-auto px-6">
                 <div class="max-w-2xl fade-up">
-                    <p class="text-amber-400 text-sm font-medium tracking-widest uppercase mb-4">About me</p>
-                    <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-white mb-6">Hello, im Muhammad Fahmi Zein</h2>
-                    <p class="text-gray-400 leading-relaxed mb-4">
+                    <p style="color:#f97316;font-size:0.8rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:16px">About me</p>
+                    <h2 style="font-size:clamp(1.75rem,4vw,2.25rem);font-weight:600;letter-spacing:-0.02em;color:var(--text-primary);margin-bottom:24px">Hello, im Muhammad Fahmi Zein</h2>
+                    <p style="color:var(--text-secondary);line-height:1.75;margin-bottom:16px">
                         I am a graduate of SMK Airlangga Balikpapan with an interest and skills in web development.
-                        I am capable of creating simple, modern, responsive, and user-friendly websites for various needs, 
+                        I am capable of creating simple, modern, responsive, and user-friendly websites for various needs,
                         such as portfolios, landing pages, and simple business websites.
                     </p>
-                    <p class="text-gray-400 leading-relaxed mb-4">
-                        I started learning modern technologies for web development and enjoy exploring new things, 
+                    <p style="color:var(--text-secondary);line-height:1.75;margin-bottom:16px">
+                        I started learning modern technologies for web development and enjoy exploring new things,
                         creating attractive designs, and building website interfaces that provide a comfortable experience on both desktop and mobile devices.
                     </p>
-                    <p class="text-gray-400 leading-relaxed">
-                        For me, a website is not just about appearance, 
-                        but also about delivering a great user experience through clean, fast, and functional design.                   
+                    <p style="color:var(--text-secondary);line-height:1.75">
+                        For me, a website is not just about appearance,
+                        but also about delivering a great user experience through clean, fast, and functional design.
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- QUOTE -->
+        <!-- ===== QUOTE ===== -->
         <section class="py-16 md:py-20">
             <div class="max-w-5xl mx-auto px-6">
-                <div class="fade-up max-w-3xl mx-auto text-center">
-                    <div class="flex justify-center mb-6">
-                        <div class="w-10 h-10 rounded-full bg-dark-800 border border-white/10 flex items-center justify-center">
-                            <i data-lucide="quote" class="w-4 h-4 text-amber-400"></i>
-                        </div>
+                <div class="fade-up" style="max-width:720px;margin:0 auto;text-align:center">
+                    <div class="quote-icon-wrap">
+                        <i data-lucide="quote" style="width:16px;height:16px;color:#f97316"></i>
                     </div>
-                    <blockquote class="text-gray-200 text-xl md:text-2xl font-light leading-relaxed tracking-tight">
+                    <blockquote style="font-size:clamp(1.1rem,3vw,1.4rem);font-weight:300;line-height:1.65;letter-spacing:-0.01em">
                         Experience is the name everyone gives to their mistakes.
                     </blockquote>
-                    <p class="text-gray-600 text-sm mt-4">— Oscar Wilde</p>
+                    <p style="color:var(--text-muted);font-size:0.875rem;margin-top:16px">— Oscar Wilde</p>
                 </div>
             </div>
         </section>
 
-        <!-- ===================== KEAHLIAN ===================== -->
-        <section id="keahlian" class="py-24 md:py-32 border-t border-white/5">
+        <!-- ===== KEAHLIAN ===== -->
+        <section id="keahlian" class="py-24 md:py-32 section-divider">
             <div class="max-w-5xl mx-auto px-6">
-                
-                <div class="fade-up mb-10">
-                    <p class="text-amber-400 text-xs font-medium tracking-[0.3em] uppercase mb-3">
-                        Expertise
-                    </p>
 
-                    <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-white">
-                        Tech Stack
-                    </h2>
+                <div class="fade-up" style="margin-bottom:52px">
+                    <p style="color:#f97316;font-size:0.75rem;font-weight:500;letter-spacing:0.3em;text-transform:uppercase;margin-bottom:12px">Expertise</p>
+                    <h2 style="font-size:clamp(1.75rem,4vw,2.25rem);font-weight:600;letter-spacing:-0.02em;color:var(--text-primary);margin-bottom:10px">Tech Stack</h2>
+                    <p style="color:var(--text-muted);font-size:0.875rem">Technologies I work with, grouped by category.</p>
                 </div>
 
-                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 fade-up"
-                    style="transition-delay:0.1s">
-
-                    <!-- HTML CSS -->
-                    <div class="skill-card bg-dark-800 border border-white/5 rounded-lg px-4 py-3 hover:bg-dark-700 transition">
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="layout" class="w-4 h-4 text-amber-400"></i>
-                            <p class="text-white text-sm">HTML/CSS</p>
+                <!-- ── FRONTEND ── -->
+                <div class="exp-group grp-frontend fade-up" style="transition-delay:0.05s">
+                    <div class="exp-group-header">
+                        <div class="exp-group-icon"><i data-lucide="monitor" style="width:16px;height:16px"></i></div>
+                        <span class="exp-group-label">Frontend</span>
+                        <div class="exp-group-line"></div>
+                    </div>
+                    <div class="skill-pills-grid">
+                        <div class="skill-pill">
+                            <div class="skill-pill-icon"><i data-lucide="layout" style="width:16px;height:16px"></i></div>
+                            <span class="skill-pill-name">HTML / CSS</span>
+                            <span class="skill-pill-level level-advanced">Advanced</span>
+                        </div>
+                        <div class="skill-pill">
+                            <div class="skill-pill-icon"><i data-lucide="braces" style="width:16px;height:16px"></i></div>
+                            <span class="skill-pill-name">JavaScript</span>
+                            <span class="skill-pill-level level-advanced">Advanced</span>
+                        </div>
+                        <div class="skill-pill">
+                            <div class="skill-pill-icon"><i data-lucide="atom" style="width:16px;height:16px"></i></div>
+                            <span class="skill-pill-name">React</span>
+                            <span class="skill-pill-level level-intermediate">Intermediate</span>
+                        </div>
+                        <div class="skill-pill">
+                            <div class="skill-pill-icon"><i data-lucide="component" style="width:16px;height:16px"></i></div>
+                            <span class="skill-pill-name">Next.js</span>
+                            <span class="skill-pill-level level-intermediate">Intermediate</span>
+                        </div>
+                        <div class="skill-pill">
+                            <div class="skill-pill-icon"><i data-lucide="wind" style="width:16px;height:16px"></i></div>
+                            <span class="skill-pill-name">Tailwind CSS</span>
+                            <span class="skill-pill-level level-advanced">Advanced</span>
+                        </div>
+                        <div class="skill-pill">
+                            <div class="skill-pill-icon"><i data-lucide="panel-top" style="width:16px;height:16px"></i></div>
+                            <span class="skill-pill-name">Bootstrap</span>
+                            <span class="skill-pill-level level-intermediate">Intermediate</span>
                         </div>
                     </div>
-
-                    <!-- JavaScript -->
-                    <div class="skill-card bg-dark-800 border border-white/5 rounded-lg px-4 py-3 hover:bg-dark-700 transition">
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="braces" class="w-4 h-4 text-amber-400"></i>
-                            <p class="text-white text-sm">JavaScript</p>
-                        </div>
-                    </div>
-
-                    <!-- Java -->
-                    <div class="skill-card bg-dark-800 border border-white/5 rounded-lg px-4 py-3 hover:bg-dark-700 transition">
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="coffee" class="w-4 h-4 text-amber-400"></i>
-                            <p class="text-white text-sm">Java</p>
-                        </div>
-                    </div>
-
-                    <!-- PHP -->
-                    <div class="skill-card bg-dark-800 border border-white/5 rounded-lg px-4 py-3 hover:bg-dark-700 transition">
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="file-code" class="w-4 h-4 text-amber-400"></i>
-                            <p class="text-white text-sm">PHP</p>
-                        </div>
-                    </div>
-
-                    <!-- SQL -->
-                    <div class="skill-card bg-dark-800 border border-white/5 rounded-lg px-4 py-3 hover:bg-dark-700 transition">
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="database" class="w-4 h-4 text-amber-400"></i>
-                            <p class="text-white text-sm">SQL</p>
-                        </div>
-                    </div>
-
-                    <!-- React -->
-                    <div class="skill-card bg-dark-800 border border-white/5 rounded-lg px-4 py-3 hover:bg-dark-700 transition">
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="atom" class="w-4 h-4 text-amber-400"></i>
-                            <p class="text-white text-sm">React</p>
-                        </div>
-                    </div>
-
-                    <!-- Next.js -->
-                    <div class="skill-card bg-dark-800 border border-white/5 rounded-lg px-4 py-3 hover:bg-dark-700 transition">
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="component" class="w-4 h-4 text-amber-400"></i>
-                            <p class="text-white text-sm">Next.js</p>
-                        </div>
-                    </div>
-
-                    <!-- Tailwind -->
-                    <div class="skill-card bg-dark-800 border border-white/5 rounded-lg px-4 py-3 hover:bg-dark-700 transition">
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="wind" class="w-4 h-4 text-amber-400"></i>
-                            <p class="text-white text-sm">Tailwind</p>
-                        </div>
-                    </div>
-
-                    <!-- Bootstrap -->
-                    <div class="skill-card bg-dark-800 border border-white/5 rounded-lg px-4 py-3 hover:bg-dark-700 transition">
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="panel-top" class="w-4 h-4 text-amber-400"></i>
-                            <p class="text-white text-sm">Bootstrap</p>
-                        </div>
-                    </div>
-
-                    <!-- Node.js -->
-                    <div class="skill-card bg-dark-800 border border-white/5 rounded-lg px-4 py-3 hover:bg-dark-700 transition">
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="server" class="w-4 h-4 text-amber-400"></i>
-                            <p class="text-white text-sm">Node.js</p>
-                        </div>
-                    </div>
-
-                    <!-- Laravel -->
-                    <div class="skill-card bg-dark-800 border border-white/5 rounded-lg px-4 py-3 hover:bg-dark-700 transition">
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="layers" class="w-4 h-4 text-amber-400"></i>
-                            <p class="text-white text-sm">Laravel</p>
-                        </div>
-                    </div>
-
-                    <!-- Postman -->
-                    <div class="skill-card bg-dark-800 border border-white/5 rounded-lg px-4 py-3 hover:bg-dark-700 transition">
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="send" class="w-4 h-4 text-amber-400"></i>
-                            <p class="text-white text-sm">Postman</p>
-                        </div>
-                    </div>
-
-                    <!-- Figma -->
-                    <div class="skill-card bg-dark-800 border border-white/5 rounded-lg px-4 py-3 hover:bg-dark-700 transition">
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="figma" class="w-4 h-4 text-amber-400"></i>
-                            <p class="text-white text-sm">Figma</p>
-                        </div>
-                    </div>
-
-                    <!-- Git -->
-                    <div class="skill-card bg-dark-800 border border-white/5 rounded-lg px-4 py-3 hover:bg-dark-700 transition">
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="git-branch" class="w-4 h-4 text-amber-400"></i>
-                            <p class="text-white text-sm">Git</p>
-                        </div>
-                    </div>
-
-                    <!-- GitHub -->
-                    <div class="skill-card bg-dark-800 border border-white/5 rounded-lg px-4 py-3 hover:bg-dark-700 transition">
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="github" class="w-4 h-4 text-amber-400"></i>
-                            <p class="text-white text-sm">GitHub</p>
-                        </div>
-                    </div>
-
                 </div>
+
+                <!-- ── BACKEND ── -->
+                <div class="exp-group grp-backend fade-up" style="transition-delay:0.12s">
+                    <div class="exp-group-header">
+                        <div class="exp-group-icon"><i data-lucide="server" style="width:16px;height:16px"></i></div>
+                        <span class="exp-group-label">Backend</span>
+                        <div class="exp-group-line"></div>
+                    </div>
+                    <div class="skill-pills-grid">
+                        <div class="skill-pill">
+                            <div class="skill-pill-icon"><i data-lucide="file-code" style="width:16px;height:16px"></i></div>
+                            <span class="skill-pill-name">PHP</span>
+                            <span class="skill-pill-level level-advanced">Advanced</span>
+                        </div>
+                        <div class="skill-pill">
+                            <div class="skill-pill-icon"><i data-lucide="layers" style="width:16px;height:16px"></i></div>
+                            <span class="skill-pill-name">Laravel</span>
+                            <span class="skill-pill-level level-advanced">Advanced</span>
+                        </div>
+                        <div class="skill-pill">
+                            <div class="skill-pill-icon"><i data-lucide="server" style="width:16px;height:16px"></i></div>
+                            <span class="skill-pill-name">Node.js</span>
+                            <span class="skill-pill-level level-intermediate">Intermediate</span>
+                        </div>
+                        <div class="skill-pill">
+                            <div class="skill-pill-icon"><i data-lucide="coffee" style="width:16px;height:16px"></i></div>
+                            <span class="skill-pill-name">Java</span>
+                            <span class="skill-pill-level level-familiar">Familiar</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── DATABASE ── -->
+                <div class="exp-group grp-database fade-up" style="transition-delay:0.19s">
+                    <div class="exp-group-header">
+                        <div class="exp-group-icon"><i data-lucide="database" style="width:16px;height:16px"></i></div>
+                        <span class="exp-group-label">Database</span>
+                        <div class="exp-group-line"></div>
+                    </div>
+                    <div class="skill-pills-grid">
+                        <div class="skill-pill">
+                            <div class="skill-pill-icon"><i data-lucide="database" style="width:16px;height:16px"></i></div>
+                            <span class="skill-pill-name">MySQL</span>
+                            <span class="skill-pill-level level-advanced">Advanced</span>
+                        </div>
+                        <div class="skill-pill">
+                            <div class="skill-pill-icon"><i data-lucide="table" style="width:16px;height:16px"></i></div>
+                            <span class="skill-pill-name">SQL</span>
+                            <span class="skill-pill-level level-advanced">Advanced</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── TOOLS ── -->
+                <div class="exp-group grp-tools fade-up" style="transition-delay:0.26s">
+                    <div class="exp-group-header">
+                        <div class="exp-group-icon"><i data-lucide="wrench" style="width:16px;height:16px"></i></div>
+                        <span class="exp-group-label">Tools & Design</span>
+                        <div class="exp-group-line"></div>
+                    </div>
+                    <div class="skill-pills-grid">
+                        <div class="skill-pill">
+                            <div class="skill-pill-icon"><i data-lucide="git-branch" style="width:16px;height:16px"></i></div>
+                            <span class="skill-pill-name">Git</span>
+                            <span class="skill-pill-level level-advanced">Advanced</span>
+                        </div>
+                        <div class="skill-pill">
+                            <div class="skill-pill-icon"><i data-lucide="github" style="width:16px;height:16px"></i></div>
+                            <span class="skill-pill-name">GitHub</span>
+                            <span class="skill-pill-level level-advanced">Advanced</span>
+                        </div>
+                        <div class="skill-pill">
+                            <div class="skill-pill-icon"><i data-lucide="send" style="width:16px;height:16px"></i></div>
+                            <span class="skill-pill-name">Postman</span>
+                            <span class="skill-pill-level level-intermediate">Intermediate</span>
+                        </div>
+                        <div class="skill-pill">
+                            <div class="skill-pill-icon"><i data-lucide="figma" style="width:16px;height:16px"></i></div>
+                            <span class="skill-pill-name">Figma</span>
+                            <span class="skill-pill-level level-intermediate">Intermediate</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
-        <!-- ===================== PROJECT ===================== -->
-        <section id="project" class="py-24 md:py-32 border-t border-white/5">
+        <!-- ===== JOURNEY ===== -->
+        <section id="journey" class="py-24 md:py-32 section-divider">
             <div class="max-w-5xl mx-auto px-6">
-                <div class="fade-up mb-12">
-                    <p class="text-amber-400 text-sm font-medium tracking-widest uppercase mb-4">Project</p>
-                    <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-white">Selected Works</h2>
+                <div class="fade-up" style="margin-bottom:64px">
+                    <p style="color:#f97316;font-size:0.75rem;font-weight:500;letter-spacing:0.3em;text-transform:uppercase;margin-bottom:12px">Timeline</p>
+                    <h2 style="font-size:clamp(1.75rem,4vw,2.25rem);font-weight:600;letter-spacing:-0.02em;color:var(--text-primary);margin-bottom:12px">My Journey</h2>
+                    <p style="color:var(--text-muted);font-size:0.875rem">A timeline of my professional and academic milestones.</p>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-5">
-                    <!-- Project 1 -->
-                    <div class="fade-up group">
-                        <div class="bg-dark-800 border border-white/5 rounded-2xl overflow-hidden hover:border-amber-400/30 transition-all duration-300 flex flex-col h-full">
-                            <div class="aspect-video overflow-hidden bg-dark-700 shrink-0">
-                                <img src="image project/Screenshot (1175).png" alt="Project 1" class="proj-img w-full h-full object-cover">
-                            </div>
-                            <div class="p-5 flex flex-col flex-1">
-                                <h3 class="text-white font-semibold mb-1.5">Financial Management System</h3>
-                                <p class="text-gray-500 text-sm leading-relaxed mb-4 flex-1">
-                                    A web-based financial management system used to manage income, expenses, and financial reports in a more structured and efficient way.
-                                </p>
-                                <div class="flex items-center gap-2 mb-4 flex-wrap">
-                                    <span class="text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">Laravel</span>
-                                    <span class="text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">Tailwind CSS</span>
-                                    <span class="text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">Alpine.js</span>
-                                    <span class="text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">MySQL</span>
-                                </div>
-                                <div class="flex items-center gap-4 pt-3 border-t border-white/5 mt-auto">
-                                    <a href="https://github.com/Zein-praft/financial-management-system" class="text-sm text-gray-300 hover:text-amber-400 transition-colors flex items-center gap-1.5">
-                                        <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Source
-                                    </a>
-                                </div>
+                <div class="timeline-container fade-up" style="transition-delay:0.1s">
+                    <div class="timeline-line"></div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-meta">
+                            <span class="timeline-year">2025 – 2026</span>
+                            <span class="timeline-badge badge-freelance">Freelance</span>
+                        </div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-card-title">Freelance</div>
+                            <div class="timeline-card-org">Self-Employed</div>
+                            <p class="timeline-card-desc">Took on freelance projects building custom websites and web applications for clients. Delivered responsive, modern landing pages, company profiles, and small business websites tailored to each client's specific needs and goals.</p>
+                            <div class="timeline-tags">
+                                <span class="timeline-tag">HTML/CSS</span>
+                                <span class="timeline-tag">JavaScript</span>
+                                <span class="timeline-tag">Laravel</span>
+                                <span class="timeline-tag">MySQL</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Project 2 -->
-                    <div class="fade-up group" style="transition-delay:0.1s">
-                        <div class="bg-dark-800 border border-white/5 rounded-2xl overflow-hidden hover:border-amber-400/30 transition-all duration-300 flex flex-col h-full">
-                            <div class="aspect-video overflow-hidden bg-dark-700 shrink-0">
-                                <img src="image project/Screenshot (1389).png" alt="Project 2" class="proj-img w-full h-full object-cover">
-                            </div>
-                            <div class="p-5 flex flex-col flex-1">
-                                <h3 class="text-white font-semibold mb-1.5">Sistem Sarana Pengaduan Sekolah</h3>
-                                <p class="text-gray-500 text-sm leading-relaxed mb-4 flex-1">
-                                    This application is a web-based digital platform designed to serve as a medium for students to submit aspirations, 
-                                    criticisms, suggestions, and complaint reports to the school management.   
-                                </p>
-                                <div class="flex items-center gap-2 mb-4 flex-wrap">
-                                    <span class="text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">Laravel</span>
-                                    <span class="text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">Tailwind CSS</span>
-                                    <span class="text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">ERD</span>
-                                    <span class="text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">MySQL</span>
-                                </div>
-                                <div class="flex items-center gap-4 pt-3 border-t border-white/5 mt-auto">
-                                    <a href="https://github.com/Zein-praft/sistem-pengaduan-sarana" class="text-sm text-gray-300 hover:text-amber-400 transition-colors flex items-center gap-1.5">
-                                        <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Source
-                                    </a>
-                                </div>
+                    <div class="timeline-item">
+                        <div class="timeline-meta">
+                            <span class="timeline-year">2026</span>
+                            <span class="timeline-badge badge-education">Education</span>
+                        </div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-card-title">Graduated SMK Airlangga Balikpapan</div>
+                            <div class="timeline-card-org">SMK Airlangga Balikpapan</div>
+                            <p class="timeline-card-desc">Completed vocational high school with a focus in Software Engineering (RPL). Built several real-world projects as part of the curriculum, including a financial management system and a school complaint platform — both deployed and used by peers and staff.</p>
+                            <div class="timeline-tags">
+                                <span class="timeline-tag">Software Engineering</span>
+                                <span class="timeline-tag">Web Development</span>
+                                <span class="timeline-tag">Database Design</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Project 3 -->
-                    <div class="fade-up group" style="transition-delay:0.2s">
-                        <div class="bg-dark-800 border border-white/5 rounded-2xl overflow-hidden hover:border-amber-400/30 transition-all duration-300 flex flex-col h-full">
-                            <div class="aspect-video overflow-hidden bg-dark-700 shrink-0">
-                                <img src="https://picsum.photos/seed/proj-app-3/600/340.jpg" alt="Project 3" class="proj-img w-full h-full object-cover">
+                    <div class="timeline-item">
+                        <div class="timeline-meta">
+                            <span class="timeline-year">2025</span>
+                            <span class="timeline-badge badge-professional">Certificate</span>
+                        </div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-card-title">Data Science</div>
+                            <div class="timeline-card-org">Dicoding Indonesia</div>
+                            <p class="timeline-card-desc">
+                                Learned the fundamentals of data science, including data analysis, visualization, 
+                                and problem-solving using modern tools and technologies. Explored how data can be transformed into meaningful insights to support better decision-making.
+                            </p>
+                            <div class="timeline-tags">
+                                <span class="timeline-tag">Python</span>
+                                <span class="timeline-tag">sql</span>
+                                <span class="timeline-tag">Pandas</span>
+                                <span class="timeline-tag">Seaborn</span>
                             </div>
-                            <div class="p-5 flex flex-col flex-1">
-                                <h3 class="text-white font-semibold mb-1.5">Resto App</h3>
-                                <p class="text-gray-500 text-sm leading-relaxed mb-4 flex-1">
-                                    A web-based restaurant application that allows users to browse menus, add items to the cart, 
-                                    place orders, and display QR Codes for digital payments or order details             
-                                </p>
-                                <div class="flex items-center gap-2 mb-4 flex-wrap">
-                                    <span class="text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">Laravel</span>
-                                    <span class="text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">Midtrans</span>
-                                    <span class="text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">Postman</span>
-                                    <span class="text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">MySQL</span>
-                                </div>
-                                <div class="flex items-center gap-4 pt-3 border-t border-white/5 mt-auto">
-                                    <a href="https://github.com/Zein-praft/resto-app" class="text-sm text-gray-300 hover:text-amber-400 transition-colors flex items-center gap-1.5">
-                                        <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Source
-                                    </a>
-                                </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-meta">
+                            <span class="timeline-year">2023</span>
+                            <span class="timeline-badge badge-education">Education</span>
+                        </div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-card-title">Started Learning Web Development</div>
+                            <div class="timeline-card-org">Self-Taught & SMK Airlangga</div>
+                            <p class="timeline-card-desc">Began the journey into web development — learning HTML, CSS, and JavaScript from scratch. Quickly developed a passion for frontend design and started building personal projects to apply and strengthen newly acquired skills.</p>
+                            <div class="timeline-tags">
+                                <span class="timeline-tag">HTML</span>
+                                <span class="timeline-tag">CSS</span>
+                                <span class="timeline-tag">JavaScript</span>
+                                <span class="timeline-tag">Bootstrap</span>
                             </div>
                         </div>
                     </div>
@@ -387,74 +953,342 @@
             </div>
         </section>
 
-        <!-- ===================== KONTAK ===================== -->
-        <section id="kontak" class="py-24 md:py-32 border-t border-white/5">
+        <!-- ===== PROJECT ===== -->
+    <section id="project" class="py-24 md:py-32 section-divider">
+        <!-- Style tambahan untuk memperbaiki bug klik dan mempercantik tampilan -->
+        <style>
+            /* Memastikan link di dalam kartu bisa diklik dan ada di layer paling atas */
+            .proj-source-link {
+                position: relative;
+                z-index: 10;
+                pointer-events: auto !important; /* Memaksa kursor berinteraksi */
+                transition: all 0.3s ease;
+            }
+
+            /* Efek Hover pada Link */
+            .proj-source-link:hover {
+                color: #f97316; /* Warna Oranye sesuai tema */
+                transform: translateX(4px);
+            }
+
+            /* Container Kartu */
+            .proj-card-wrap {
+                perspective: 1000px; /* Untuk efek 3D tilt */
+                height: 100%;
+            }
+
+            .proj-card {
+                background-color: var(--card-bg);
+                border: 1px solid var(--border-color);
+                border-radius: 12px;
+                overflow: hidden;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                transition: transform 0.1s ease, box-shadow 0.3s ease;
+                transform-style: preserve-3d; /* Penting untuk efek tilt */
+                position: relative;
+            }
+
+            /* Memastikan container gambar tidak menutupi link */
+            .proj-img-wrap {
+                overflow: hidden;
+                position: relative;
+                z-index: 1;
+            }
+
+            .proj-img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.5s ease;
+            }
+
+            /* Efek zoom gambar saat hover card */
+            .proj-card-wrap:hover .proj-img {
+                transform: scale(1.05);
+            }
+
+            /* Styling Body Kartu */
+            .proj-body {
+                padding: 24px;
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+                position: relative;
+                z-index: 2; /* Di atas background card */
+                background-color: var(--card-bg); /* Pastikan ada background solid */
+            }
+
+            .proj-title {
+                font-size: 1.25rem;
+                font-weight: 600;
+                margin-bottom: 8px;
+                color: var(--text-primary);
+            }
+
+            .proj-desc {
+                font-size: 0.95rem;
+                color: var(--text-secondary);
+                line-height: 1.6;
+                margin-bottom: 20px;
+                display: -webkit-box;
+                -webkit-line-clamp: 3; /* Membatasi teks agar rapi */
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            /* Styling Tags */
+            .proj-tag {
+                font-size: 0.75rem;
+                padding: 4px 10px;
+                border-radius: 20px;
+                background-color: rgba(249, 115, 22, 0.1); /* Oranye transparan */
+                color: #f97316;
+                font-weight: 600;
+                letter-spacing: 0.05em;
+            }
+
+            /* Footer Kartu untuk mendorong link ke bawah */
+            .proj-footer {
+                margin-top: auto; /* Push link to bottom */
+                padding-top: 16px;
+                border-top: 1px solid var(--border-color);
+            }
+        </style>
+
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="fade-up" style="margin-bottom:48px">
+                <p style="color:#f97316;font-size:0.8rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:16px">Project</p>
+                <h2 style="font-size:clamp(1.75rem,4vw,2.25rem);font-weight:600;letter-spacing:-0.02em;color:var(--text-primary)">Selected Works</h2>
+            </div>
+
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px">
+
+                <!-- Card 1 -->
+                <div class="proj-card-wrap fade-up" data-tilt>
+                    <div class="proj-card">
+                        <div class="proj-img-wrap aspect-video">
+                            <!-- Pastikan path gambar sesuai dengan file kamu -->
+                            <img src="image project/Screenshot (1175).png" alt="Financial Management System" class="proj-img">
+                        </div>
+                        <div class="proj-body">
+                            <h3 class="proj-title">Financial Management System</h3>
+                            <p class="proj-desc">A web-based financial management system used to manage income, expenses, and financial reports in a more structured and efficient way.</p>
+                            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px">
+                                <span class="proj-tag">Laravel</span>
+                                <span class="proj-tag">Tailwind CSS</span>
+                                <span class="proj-tag">Alpine.js</span>
+                                <span class="proj-tag">MySQL</span>
+                            </div>
+                            <div class="proj-footer">
+                                <!-- Link sekarang pasti bisa diklik -->
+                                <a href="https://github.com/Zein-praft/financial-management-system" target="_blank" class="proj-source-link" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-size:0.9rem;font-weight:600;color:var(--text-primary)">
+                                    <i data-lucide="external-link" style="width:16px;height:16px"></i> Source
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="proj-card-wrap fade-up" data-tilt style="transition-delay:0.1s">
+                    <div class="proj-card">
+                        <div class="proj-img-wrap aspect-video">
+                            <img src="image project/Screenshot (1389).png" alt="Sistem Pengaduan" class="proj-img">
+                        </div>
+                        <div class="proj-body">
+                            <h3 class="proj-title">Sistem Sarana Pengaduan Sekolah</h3>
+                            <p class="proj-desc">A web-based digital platform designed to serve as a medium for students to submit aspirations, criticisms, suggestions, and complaint reports to the school management.</p>
+                            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px">
+                                <span class="proj-tag">Laravel</span>
+                                <span class="proj-tag">Tailwind CSS</span>
+                                <span class="proj-tag">ERD</span>
+                                <span class="proj-tag">MySQL</span>
+                            </div>
+                            <div class="proj-footer">
+                                <a href="https://github.com/Zein-praft/sistem-pengaduan-sarana" target="_blank" class="proj-source-link" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-size:0.9rem;font-weight:600;color:var(--text-primary)">
+                                    <i data-lucide="external-link" style="width:16px;height:16px"></i> Source
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="proj-card-wrap fade-up" data-tilt style="transition-delay:0.2s">
+                    <div class="proj-card">
+                        <div class="proj-img-wrap aspect-video">
+                            <img src="https://picsum.photos/seed/proj-app-3/600/340.jpg" alt="Resto App" class="proj-img">
+                        </div>
+                        <div class="proj-body">
+                            <h3 class="proj-title">Resto App</h3>
+                            <p class="proj-desc">A web-based restaurant application that allows users to browse menus, add items to the cart, place orders, and display QR Codes for digital payments or order details.</p>
+                            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px">
+                                <span class="proj-tag">Laravel</span>
+                                <span class="proj-tag">Midtrans</span>
+                                <span class="proj-tag">Postman</span>
+                                <span class="proj-tag">MySQL</span>
+                            </div>
+                            <div class="proj-footer">
+                                <a href="https://github.com/Zein-praft/resto-app" target="_blank" class="proj-source-link" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-size:0.9rem;font-weight:600;color:var(--text-primary)">
+                                    <i data-lucide="external-link" style="width:16px;height:16px"></i> Source
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- ===== KONTAK ===== -->
+        <section id="kontak" class="py-24 md:py-32 section-divider">
             <div class="max-w-5xl mx-auto px-6">
                 <div class="fade-up">
-                    <p class="text-amber-400 text-sm font-medium tracking-widest uppercase mb-4">Contact</p>
-                    <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-white mb-4">Contact me</h2>
-                    <p class="text-gray-400 leading-relaxed mb-12 max-w-lg">
-                        Let’s turn your ideas into modern digital experiences.
-                        Building modern, responsive, and user-friendly web experiences.
+                    <p style="color:#f97316;font-size:0.8rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:16px">Contact</p>
+                    <h2 style="font-size:clamp(1.75rem,4vw,2.25rem);font-weight:600;letter-spacing:-0.02em;color:var(--text-primary);margin-bottom:16px">Contact me</h2>
+                    <p style="color:var(--text-secondary);line-height:1.7;margin-bottom:48px;max-width:420px">
+                        Let's turn your ideas into modern digital experiences. Building modern, responsive, and user-friendly web experiences.
                     </p>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <!-- Gmail -->
-                        <a href="mailto:zeinfahmi449@gmail.com" class="group flex items-center gap-4 p-4 rounded-xl bg-white/[0.03] border border-white/5 hover:border-amber-400/30 hover:bg-white/[0.06] transition-all duration-300">
-                            <div class="w-11 h-11 rounded-lg bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-amber-400/10 transition-colors">
-                                <i data-lucide="mail" class="w-5 h-5 text-gray-400 group-hover:text-amber-400 transition-colors"></i>
-                            </div>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;max-width:560px">
+                        <a href="mailto:zeinfahmi449@gmail.com" class="contact-card">
+                            <div class="contact-icon"><i data-lucide="mail" style="width:20px;height:20px"></i></div>
                             <div>
-                                <p class="text-xs text-gray-500 mb-0.5">Gmail</p>
-                                <p class="text-sm text-gray-300 group-hover:text-white transition-colors truncate">zeinfahmi449@gmail.com</p>
+                                <p class="contact-label">Gmail</p>
+                                <p class="contact-value" style="font-size:0.8rem">zeinfahmi449@gmail.com</p>
                             </div>
                         </a>
-
-                        <!-- GitHub -->
-                        <a href="https://github.com/Zein-praft" target="_blank" class="group flex items-center gap-4 p-4 rounded-xl bg-white/[0.03] border border-white/5 hover:border-amber-400/30 hover:bg-white/[0.06] transition-all duration-300">
-                            <div class="w-11 h-11 rounded-lg bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-amber-400/10 transition-colors">
-                                <i data-lucide="github" class="w-5 h-5 text-gray-400 group-hover:text-amber-400 transition-colors"></i>
-                            </div>
+                        <a href="https://github.com/Zein-praft" target="_blank" class="contact-card">
+                            <div class="contact-icon"><i data-lucide="github" style="width:20px;height:20px"></i></div>
                             <div>
-                                <p class="text-xs text-gray-500 mb-0.5">GitHub</p>
-                                <p class="text-sm text-gray-300 group-hover:text-white transition-colors">Zein-praft</p>
+                                <p class="contact-label">GitHub</p>
+                                <p class="contact-value">Zein-praft</p>
                             </div>
                         </a>
-
-                        <!-- WhatsApp -->
-                        <!-- <a href="https://wa.me/+628884512218" target="_blank" class="group flex items-center gap-4 p-4 rounded-xl bg-white/[0.03] border border-white/5 hover:border-amber-400/30 hover:bg-white/[0.06] transition-all duration-300">
-                            <div class="w-11 h-11 rounded-lg bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-amber-400/10 transition-colors">
-                                <i data-lucide="message-circle" class="w-5 h-5 text-gray-400 group-hover:text-amber-400 transition-colors"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-gray-500 mb-0.5">WhatsApp</p>
-                                <p class="text-sm text-gray-300 group-hover:text-white transition-colors">+62 888 4512 218</p>
-                            </div>
-                        </a> -->
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- ===================== FOOTER ===================== -->
-    <footer class="py-10 border-t border-white/5">
+    <!-- ===== FOOTER ===== -->
+    <footer class="section-divider" style="padding:40px 0">
         <div class="max-w-5xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-                <div class="flex flex-col items-center md:items-start gap-1">
-                    <span class="text-white/80 text-sm font-medium tracking-wide">Muhammad Fahmi Zein</span>
-                    <p class="text-gray-600 text-xs">© 2026 All rights reserved.</p>
+            <div style="display:flex;align-items:center;justify-content:space-between;width:100%">
+
+                <div style="text-align:left">
+                    <span class="footer-name" style="font-size:0.875rem;font-weight:500;letter-spacing:0.02em;display:block">
+                        Muhammad Fahmi Zein
+                    </span>
+                    <p class="footer-copy" style="font-size:0.75rem;margin-top:4px">
+                        © 2026 All rights reserved.
+                    </p>
                 </div>
-                <a href="#" class="group flex items-center gap-2 text-gray-600 text-sm hover:text-amber-400 transition-colors">
+
+                <a href="#" class="back-top-btn">
                     <span>back to top</span>
-                    <span class="flex items-center justify-center w-7 h-7 rounded-full border border-white/10 group-hover:border-amber-400/40 transition-colors">
-                        <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>
+                    <span class="back-top-circle">
+                        <i data-lucide="arrow-up" style="width:14px;height:14px"></i>
                     </span>
                 </a>
+
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+    /* ============================================================
+       LUCIDE ICONS
+    ============================================================ */
+    lucide.createIcons();
+
+    /* ============================================================
+       DARK / LIGHT THEME TOGGLE
+    ============================================================ */
+    const html        = document.documentElement;
+    const toggleBtn   = document.getElementById('themeToggle');
+    const themeIcon   = document.getElementById('themeIcon');
+
+    // Simpan preferensi ke localStorage
+    const saved = localStorage.getItem('theme') || 'dark';
+    applyTheme(saved);
+
+    toggleBtn.addEventListener('click', () => {
+        const current = html.getAttribute('data-theme');
+        applyTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
+    function applyTheme(theme) {
+        html.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+
+        // Ganti icon: dark mode tampilkan "moon", light mode tampilkan "sun"
+        themeIcon.setAttribute('data-lucide', theme === 'dark' ? 'moon' : 'sun');
+        lucide.createIcons();
+    }
+
+    /* ============================================================
+       MOBILE MENU
+    ============================================================ */
+    const menuBtn    = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    /* ============================================================
+       SCROLL FADE-UP (termasuk stagger children)
+    ============================================================ */
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.fade-up, .stagger-children').forEach(el => observer.observe(el));
+
+    /* ============================================================
+       3D TILT EFFECT — Project Cards
+    ============================================================ */
+    document.querySelectorAll('[data-tilt]').forEach(wrap => {
+        const card = wrap.querySelector('.proj-card');
+        if (!card) return;
+
+        wrap.addEventListener('mousemove', e => {
+            const rect   = wrap.getBoundingClientRect();
+            const cx     = rect.left + rect.width  / 2;
+            const cy     = rect.top  + rect.height / 2;
+            const dx     = (e.clientX - cx) / (rect.width  / 2);   // -1 to 1
+            const dy     = (e.clientY - cy) / (rect.height / 2);   // -1 to 1
+            const tiltX  =  dy * -7;   // max 7 deg up/down
+            const tiltY  =  dx *  7;   // max 7 deg left/right
+            card.style.transform = `perspective(900px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.02)`;
+        });
+
+        wrap.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)';
+        });
+    });
+
+    /* ============================================================
+       SKILL GRID — auto 5 columns on wider viewport
+    ============================================================ */
+    function updateSkillGrid() {
+        const grid = document.getElementById('skillGrid');
+        if (!grid) return;
+        const cols = window.innerWidth >= 1024 ? 5
+                   : window.innerWidth >= 768  ? 4 : 2;
+        grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+    }
+    updateSkillGrid();
+    window.addEventListener('resize', updateSkillGrid);
+    </script>
 </body>
 </html>
